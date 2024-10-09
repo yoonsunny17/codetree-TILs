@@ -67,7 +67,7 @@ def move(c, d, fairy):
         return [True, r, c]
 
 # 정령 이동하는 로직 (bfs 탐색)
-def bfs(r, c, fairy):
+def bfs(r, c):
     global ans
 
     q = deque()
@@ -82,7 +82,9 @@ def bfs(r, c, fairy):
             rr = r + dr[i]
             cc = c + dc[i]
             # 탐색 지점이 범위를 벗어났거나, 이미 방문한 곳이거나, 아니면 0인 경우는 갈 수 없어
-            if not inBoard(rr, cc) or visited[rr][cc]:
+            # 0 인 지점을 방문할 수 없는 경우 > 이미 골렘이 착지한 루트들을 0이 아닌 숫자들로 표시했기 때문
+            # 정령들은 골렘 몸체 내부에서만 이동이 가능하다
+            if not inBoard(rr, cc) or visited[rr][cc] or matrix[rr][cc] == 0:
                 continue
             # 조건 1) 해당 정령이 타고있는 골렘의 다른 곳으로 이동하는 경우 (절댓값이 동일한 경우. 출구 위치를 음수로 표현해줘서 절댓값으로 확인해야함)
             # 조건 2) 해당 정령이 골렘의 출구에 있고 && 다른 정령의 골렘 몸체로 이동하는 경우
@@ -113,12 +115,12 @@ for fairy in range(1, K+1):
     
     # 정령이 타고 있는 골렘 이동시키기
     rlt = move(c, d, fairy)
-    inBound, r, c = rlt
+    inBound, x, y = rlt
 
     # 골렘 몸 일부가 범위 벗어나있는지 확인
     if inBound:
         # 범위 내에 존재하는 경우, 정령 이동
-        ans += bfs(r, c, fairy)
+        ans += bfs(x, y)
     else:
         # 범위 내에 존재하지 않는다면, 숲 초기화해주기
         matrix = [[0] * M for _ in range(N)]
