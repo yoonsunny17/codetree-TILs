@@ -25,7 +25,8 @@ for idx in range(N-M+1):
         tmp.append(i-min_check)
     
     sorted_tmp = sorted(tmp)
-    if check_b == sorted_tmp:
+    sorted_check_b = sorted(check_b)
+    if sorted_check_b == sorted_tmp:
         cnt += 1
         index_lst.append(idx)
 
