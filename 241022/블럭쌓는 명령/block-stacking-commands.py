@@ -7,4 +7,6 @@ for _ in range(K):
         steps[i] += 1
 
 steps.sort()
-print(steps[(1+N)//2-1])
+mid = (1+N)//2-1
+
+print(steps[mid])
