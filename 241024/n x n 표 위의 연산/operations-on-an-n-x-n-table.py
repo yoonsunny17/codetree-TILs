@@ -9,7 +9,7 @@ def calc_arr(arr):
             cnt -= arr[i+1]
         if arr[i] == 'x':
             cnt *= arr[i+1]
-    
+        
     return cnt
 
 def find_max_min(r, c, arr):
@@ -37,7 +37,8 @@ def find_max_min(r, c, arr):
 N = int(input())
 matrix = [list(map(str, input().split())) for _ in range(N)]
 
-max_calc = 0
+# 최댓값 음수 가능하므로 0으로 초기화하면 안됨
+max_calc = float('-inf')
 min_calc = float('inf')
 
 visited = [[False] * N for _ in range(N)]
