@@ -1,35 +1,42 @@
-def dfs(student, values, conditions, N):
-    # 모든 학생들에게 값을 할당했으면 끝
-    if student == N:
+def check(selected, now, a, b, same):
+    # 둘중 하나라도 아직 알파벳 선택이 안되었으면 보류    
+    if selected[a] == 0 or selected[b] == 0:
+        return True
+
+    # 같아야 하는데 달라
+    if same and selected[a] != selected[b]:
+        return False
+
+    # 달라야 하는데 같아
+    if not same and selected[a] == selected[b]:
+        return False
+    
+    return True
+
+def backtracking(depth, N, selected, conditions):
+    # 모든 학생이 선택 완료했으면 끝
+    if depth == N:
         return 1
     
     cnt = 0
-    # 현재 학생에게 A, B, C중 하나를 할당해줘
-    for value in ['A', 'B', 'C']:
-        values[student] = value
+    # 현재 학생(depth)에게 A, B, C중 하나 할당
+    for choice in [1, 2, 3]:
+        selected[depth] = choice
+
+        # 현재 선택이 유효한지 체크
         flag = True
-
-        # 현재까지 할당된 학생들에 대해 조건 확인해보기
         for c, a, b in conditions:
-            a, b = int(a)-1, int(b)-1
-            # 현재 검사하는 두 학생 모두에게 값이 할당되었을 때만 체크 가능
-            if a <= student and b <= student:
-                # 둘이 같아야 하는데 다르다면 끝
-                if c == 'S' and values[a] != values[b]:
-                    flag = False
-                    break
+            if not check(selected, depth, int(a)-1, int(b)-1, c=='S'):
+                flag = False
+                break
 
-                # 둘이 달라야 하는데 같다면 끝
-                if c == 'D' and values[a] == values[b]:
-                    flag = False
-                    break
-    
-        # 현재까지 유효하다면 체크 계속 진행
         if flag:
-            cnt += dfs(student+1, values, conditions, N)
-    
-    return cnt
+            cnt += backtracking(depth+1, N, selected, conditions)
 
+        # 선택 취소
+        selected[depth] = 0
+
+    return cnt
 
 N, K = map(int, input().split())
 conditions = []
@@ -37,8 +44,7 @@ for _ in range(K):
     c, a, b = input().split()
     conditions.append([c, a, b])
 
-# 각 학생의 값을 저장할 리스트
-values = [None] * N
-rlt = dfs(0, values, conditions, N)
-
+# 0: 아직 선택안됨, 1:A 2:B 3:C
+selected = [0] * N
+rlt = backtracking(0, N, selected, conditions)
 print(rlt)
