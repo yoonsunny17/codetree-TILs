@@ -1,50 +1,42 @@
-def check(selected, now, a, b, same):
-    # 둘중 하나라도 아직 알파벳 선택이 안되었으면 보류    
-    if selected[a] == 0 or selected[b] == 0:
-        return True
-
-    # 같아야 하는데 달라
-    if same and selected[a] != selected[b]:
-        return False
-
-    # 달라야 하는데 같아
-    if not same and selected[a] == selected[b]:
-        return False
+def count_arrangements(N, K, conditions):
+    # 학생들의 배치를 나타내는 리스트 초기화
+    arrangement = [-1] * N
+    count = 0  # 가능한 경우의 수를 세는 변수
     
-    return True
-
-def backtracking(depth, N, selected, conditions):
-    # 모든 학생이 선택 완료했으면 끝
-    if depth == N:
-        return 1
-    
-    cnt = 0
-    # 현재 학생(depth)에게 A, B, C중 하나 할당
-    for choice in [1, 2, 3]:
-        selected[depth] = choice
-
-        # 현재 선택이 유효한지 체크
-        flag = True
+    def check_valid():
+        # 현재 배치가 모든 조건을 만족하는지 확인
         for c, a, b in conditions:
-            if not check(selected, depth, int(a)-1, int(b)-1, c=='S'):
-                flag = False
-                break
-
-        if flag:
-            cnt += backtracking(depth+1, N, selected, conditions)
-
-        # 선택 취소
-        selected[depth] = 0
-
-    return cnt
+            if c == 'S':  # S 조건은 같은 문자여야 함
+                if arrangement[a] != arrangement[b]:
+                    return False
+            elif c == 'D':  # D 조건은 다른 문자여야 함
+                if arrangement[a] == arrangement[b]:
+                    return False
+        return True
+    
+    def backtrack(student_index):
+        nonlocal count
+        if student_index == N:
+            # 모든 학생에게 문자를 할당했을 때 조건을 확인
+            if check_valid():
+                count += 1
+            return
+        
+        # 각 학생에게 'A', 'B', 'C' 중 하나를 할당
+        for letter in range(3):
+            arrangement[student_index] = letter
+            backtrack(student_index + 1)
+            arrangement[student_index] = -1  # 백트래킹: 원상복구
+    
+    # 백트래킹 시작
+    backtrack(0)
+    return count
 
 N, K = map(int, input().split())
 conditions = []
 for _ in range(K):
     c, a, b = input().split()
-    conditions.append([c, a, b])
+    conditions.append((c, int(a)-1, int(b)-1))
 
-# 0: 아직 선택안됨, 1:A 2:B 3:C
-selected = [0] * N
-rlt = backtracking(0, N, selected, conditions)
-print(rlt)
+# 가능한 경우의 수 출력
+print(count_arrangements(N, K, conditions))
