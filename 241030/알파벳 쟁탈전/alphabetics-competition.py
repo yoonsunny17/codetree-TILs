@@ -1,31 +1,44 @@
-from itertools import product
+def dfs(student, values, conditions, N):
+    # 모든 학생들에게 값을 할당했으면 끝
+    if student == N:
+        return 1
+    
+    cnt = 0
+    # 현재 학생에게 A, B, C중 하나를 할당해줘
+    for value in ['A', 'B', 'C']:
+        values[student] = value
+        flag = True
 
-def backtracking(value, lst):
-    for i in lst:
-        # c, int(a), int(b) = i
-        c, a, b = i
-        a, b = int(a), int(b)
-        # 달라야 할때
-        if c == 'D':
-            # 같으면 땡
-            if value[a-1] == value[b-1]:
-                return False
+        # 현재까지 할당된 학생들에 대해 조건 확인해보기
+        for c, a, b in conditions:
+            a, b = int(a)-1, int(b)-1
+            # 현재 검사하는 두 학생 모두에게 값이 할당되었을 때만 체크 가능
+            if a <= student and b <= student:
+                # 둘이 같아야 하는데 다르다면 끝
+                if c == 'S' and values[a] != values[b]:
+                    flag = False
+                    break
 
-        # 같아야 할때
-        if c == 'S':
-            # 다르면 땡
-            if value[a-1] != value[b-1]:
-                return False
-    return True
+                # 둘이 달라야 하는데 같다면 끝
+                if c == 'D' and values[a] == values[b]:
+                    flag = False
+                    break
+    
+        # 현재까지 유효하다면 체크 계속 진행
+        if flag:
+            cnt += dfs(student+1, values, conditions, N)
+    
+    return cnt
+
 
 N, K = map(int, input().split())
-lst = []
+conditions = []
 for _ in range(K):
-    c, a, b = map(str, input().split())
-    lst.append([c, a, b])
+    c, a, b = input().split()
+    conditions.append([c, a, b])
 
-cnt = 0
-for value in product(['A', 'B', 'C'], repeat=N):
-    if backtracking(value, lst):
-        cnt += 1
-print(cnt)
+# 각 학생의 값을 저장할 리스트
+values = [None] * N
+rlt = dfs(0, values, conditions, N)
+
+print(rlt)
