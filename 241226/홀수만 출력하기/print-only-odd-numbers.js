@@ -4,7 +4,7 @@ let N = Number(input[0])
 let arr = input.slice(1, N+1).map(Number)
 
 for (i of arr) {
-    if (i % 3 === 0) {
+    if (i % 2 !== 0 && i % 3 === 0) {
         console.log(i)
     }
 }
