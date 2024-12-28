@@ -11,4 +11,4 @@ for (let i=a; i<=b; i++) {
     }
 }
 
-console.log(cnt)
+console.log(cnt > 0 ? 1 : 0)
