@@ -8,11 +8,16 @@ let arr2 = input[2].split(' ').map(Number)
 let check = 0;
 
 for (let i=0; i<=n1-n2; i++) {
-    let tmp = arr1.slice(i, i+n2)
+    let isMatch = true;
 
-    if (JSON.stringify(arr2) === JSON.stringify(tmp)) {
-        check++
+    for (let j=0; j<n2; j++) {
+        if (arr1[i+j] !== arr2[j]) {
+            isMatch = false
+            break;
+        }
     }
+
+    if (isMatch) check++
 }
 
 console.log(check > 0 ? 'Yes' : 'No')
