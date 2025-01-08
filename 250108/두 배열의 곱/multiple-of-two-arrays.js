@@ -1,22 +1,29 @@
 fs = require('fs')
 input = fs.readFileSync(0).toString().trim().split('\n')
 
-let arr1 = []
-let arr2 = []
+let arr1 = Array(3).fill(0).map(() => Array(3).fill(0))
+let arr2 = Array(3).fill(0).map(() => Array(3).fill(0))
 
 for (let i=0; i<3; i++) {
-    arr1.push(input[i].split(' ').map(Number))
-}
-
-for (let i=4; i<7; i++) {
-    arr2.push(input[i].split(' ').map(Number))
+    arr1[i] = input[i].split(' ').map(Number)
 }
 
 for (let i=0; i<3; i++) {
-    let str = ''
+    arr2[i] = input[i+4].split(' ').map(Number)
+}
+
+let arr3 = Array(3).fill(0).map(() => Array(3).fill(0))
+for (let i=0; i<3; i++) {
     for (let j=0; j<3; j++) {
-        str += `${arr1[i][j] * arr2[i][j]} `
+        arr3[i][j] = arr1[i][j] * arr2[i][j]
     }
+}
 
+for (let row of arr3) {
+    let str = ''
+    for (let col of row) {
+        str += `${col} `
+    }
+    
     console.log(str)
 }
