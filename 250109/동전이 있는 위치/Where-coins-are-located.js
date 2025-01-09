@@ -7,11 +7,7 @@ let arr = Array(n).fill(0).map(() => Array(n).fill(0))
 for (let i=1; i<m+1; i++) {
     let [r, c] = input[i].split(' ').map(Number)
 
-    for (let i=0; i<n; i++) {
-        for (let j=0; j<n; j++) {
-            arr[r-1][c-1] = 1
-        }
-    }
+    arr[r-1][c-1] = 1
 }
 
 for (let row of arr) {
