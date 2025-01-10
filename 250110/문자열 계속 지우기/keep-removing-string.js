@@ -3,6 +3,10 @@ input = fs.readFileSync(0).toString().trim().split('\n')
 
 let [a, b] = input
 
+if (a === b) {
+    a = ''
+}
+
 while (a.length > b.length) {
     for (let i=0; i<a.length; i++) {
         if (a.slice(i, i+b.length) === b) {
