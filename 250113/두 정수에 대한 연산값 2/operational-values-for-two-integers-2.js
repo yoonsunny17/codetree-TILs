@@ -1,11 +1,14 @@
 function solution(a, b) {
-    let minVal = Math.min(a, b);
-    let maxVal = Math.max(a, b);
+    if (a < b) {
+        a += 10
+        b *= 2
+    } else {
+        a *= 2
+        b += 10
+    }
 
-    minVal += 10
-    maxVal *= 2
-
-    return [minVal, maxVal]
+    let rlt = `${a} ${b}`
+    return rlt
 }
 
 const fs = require('fs')
@@ -13,6 +16,4 @@ const input = fs.readFileSync(0).toString().trim().split(' ')
 
 let [a, b] = input.map(Number)
 
-let [minVal, maxVal] = solution(a, b)
-
-console.log(minVal, maxVal)
+console.log(solution(a, b))
