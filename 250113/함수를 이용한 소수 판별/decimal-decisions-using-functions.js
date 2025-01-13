@@ -16,7 +16,8 @@ function isPrime(n) {
 function solution(a, b) {
     let sum = 0;
     for (let i=a; i<=b; i++) {
-        if (isPrime(i)) sum += i
+        if (i === 1) continue;
+        if (isPrime(i)) sum += i;
     }
 
     return sum
