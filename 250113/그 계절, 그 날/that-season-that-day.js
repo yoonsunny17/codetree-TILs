@@ -3,47 +3,34 @@ const input = fs.readFileSync(0).toString().trim().split(' ').map(Number);
 
 let [y, m, d] = input;
 
-// 윤년인지 확인
-function isYoonYear(year) {
-    let flag = true;
-
-    if (year % 4 === 0) {
-        flag = true;
-    } else if (year % 100) {
-        flag = false;
-    } else if (year % 400) {
-        flag = true;
-    } else {
-        flag = false;
-    }
-
-    return flag
+function isYoonYear(y) {
+    if (y % 400 === 0) return true;
+    if (y % 100 === 0) return false;
+    return y % 4 === 0;
 }
 
-// 존재하는 월, 일인지 체크
 function checkDayandMonth(y, m, d) {
-    if (isYoonYear(y) && m === 2) {
-        return d <= 29 ? true : false;
-    } else if (!isYoonYear(y) && m === 2) {
-        return d <= 28 ? true : false;
+    if (m === 2) {
+        return isYoonYear(y) ? d <= 29 : d <= 28;
     }
 
-    if (m === 4 || m === 6 || m === 9 || m === 11) {
-        return d <= 30 ? true : false;
+    if ([4, 6, 9, 11].includes(m)) {
+        return d <= 30;
     }
 
-    return d <= 31 ? true : false;
+    return true;
 }
 
-// 해당 날짜의 계절 확인
 function isWhatSeason(m) {
-    if ([3, 4, 5].includes(m)) {
-        return "Spring"
-    } else if ([6, 7, 8].includes(m)) {
-        return "Summer"
-    } else if ([9, 10, 11].includes(m)) {
-        return "Fall"
-    } else return "Winter"
+    if (m >= 3 && m <= 5) {
+        return "Spring";
+    } else if (m >= 6 && m <= 8) {
+        return "Summer";
+    } else if (m >= 9 && m <= 11) {
+        return "Fall";
+    } else {
+        return "Winter";
+    }
 }
 
-console.log(checkDayandMonth(y, m, d) ? isWhatSeason(m) : -1)
+console.log(checkDayandMonth(y, m, d) ? isWhatSeason(m) : -1);
