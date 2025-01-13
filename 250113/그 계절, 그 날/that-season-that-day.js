@@ -9,9 +9,9 @@ function isYoonYear(year) {
 
     if (year % 4 === 0) {
         flag = true;
-    } else if (y % 100) {
+    } else if (year % 100) {
         flag = false;
-    } else if (y % 400) {
+    } else if (year % 400) {
         flag = true;
     } else {
         flag = false;
