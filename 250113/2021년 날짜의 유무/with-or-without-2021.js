@@ -12,7 +12,7 @@ function solution(m, d) {
         if (1 <= d && d <= 30) {
             return "Yes"
         }
-    } else {
+    } else if (m === 2) {
         if (1 <= d && d <= 28) {
             return "Yes"
         }
