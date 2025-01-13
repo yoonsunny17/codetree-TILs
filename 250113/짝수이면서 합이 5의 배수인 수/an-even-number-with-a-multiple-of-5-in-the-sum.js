@@ -5,7 +5,7 @@ function solution(n) {
     const arr = n.split('');
     let cnt = arr.reduce((total, curr) => total += Number(curr), 0)
 
-    if (Number(n) % 2 === 0 && cnt >= 5) {
+    if (Number(n) % 2 === 0 && cnt % 5 === 0) {
         return "Yes"
     } else {
         return "No"
