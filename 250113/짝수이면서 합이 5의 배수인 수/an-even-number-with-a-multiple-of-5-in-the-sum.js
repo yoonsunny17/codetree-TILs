@@ -7,7 +7,9 @@ function solution(n) {
 
     if (Number(n) % 2 === 0 && cnt >= 5) {
         return "Yes"
-    } else "No"
+    } else {
+        return "No"
+    }
 }
 
 console.log(solution(n))
