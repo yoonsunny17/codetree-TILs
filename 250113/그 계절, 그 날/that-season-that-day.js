@@ -37,11 +37,11 @@ function checkDayandMonth(y, m, d) {
 
 // 해당 날짜의 계절 확인
 function isWhatSeason(m) {
-    if (3 <= m && m <= 5) {
+    if ([3, 4, 5].includes(m)) {
         return "Spring"
-    } else if (6 <= m && m <= 8) {
+    } else if ([6, 7, 8].includes(m)) {
         return "Summer"
-    } else if (9 <= m && m <= 11) {
+    } else if ([9, 10, 11].includes(m)) {
         return "Fall"
     } else return "Winter"
 }
