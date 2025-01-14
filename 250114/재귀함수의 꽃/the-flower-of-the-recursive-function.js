@@ -2,16 +2,13 @@ const fs = require('fs')
 const n = Number(fs.readFileSync(0).toString().trim())
 
 function solution(n) {
-    let rlt = []
-    for (let i=n; i>=1; i--) {
-        rlt.push(i)
+    if (n === 0) {
+        return;
     }
 
-    for (let i=1; i<=n; i++) {
-        rlt.push(i)
-    }
-
-    return rlt.join(' ')
+    process.stdout.write(n + ' ');
+    solution(n-1);
+    process.stdout.write(n + ' ');
 }
 
-console.log(solution(n))
+solution(n)
