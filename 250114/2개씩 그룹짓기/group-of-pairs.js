@@ -4,19 +4,13 @@ const input = fs.readFileSync(0).toString().trim().split('\n')
 let n = Number(input[0])
 let numbs = input[1].split(' ').map(Number)
 
-numbs.sort((a, b) => b-a)
+numbs.sort((a, b) => a-b)
 
-let arr = []
-let totalCalc = numbs.reduce((total, curr) => total += curr, 0)
+let maxVal = 0
+for (let i=0; i<n; i++) {
+    const calc = numbs[i] + numbs[2*n-1-i]
 
-for (let i=0; i<2*n-1; i++) {
-    let cnt = 0
-    for (let j=i+1; j<2*n; j++) {
-        cnt = numbs[i]+numbs[j]
-        if (cnt >= (totalCalc - cnt) / (n-1)) {
-            arr.push(cnt)
-        }
-    }
+    maxVal = Math.max(calc, maxVal)
 }
 
-console.log(Math.min(...arr))
+console.log(maxVal)
