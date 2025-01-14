@@ -1,12 +1,12 @@
-const fs = require('fs')
-const input = fs.readFileSync(0).toString().trim().split('\n')
+const fs = require("fs");
+const input = fs.readFileSync(0).toString().trim().split('\n');
 
-let n = Number(input[0])
-let a = input[1].split(' ').map(Number)
-let b = input[2].split(' ').map(Number)
+const n = Number(input[0]);
+const a = input[1].trim().split(' ').map(Number);
+const b = input[2].trim().split(' ').map(Number);
 
-function solution() {
-    for (let i=0; i<n; i++) {
+function equal() {
+    for (let i = 0; i < n; i++) {
         if (a[i] !== b[i]) {
             return false;
         }
@@ -14,7 +14,11 @@ function solution() {
     return true;
 }
 
-a.sort((a, b) => a - b)
-b.sort((a, b) => a - b)
+a.sort((a, b) => a - b);
+b.sort((a, b) => a - b);
 
-console.log(solution() ? 'Yes' : 'No')
+if (equal()) {
+    console.log("Yes");
+} else {
+    console.log("No");
+}
