@@ -35,4 +35,4 @@ if (isValid()) {
     }
 }
 
-console.log(isValid(a, b, c) ? cnt : "-1")
+console.log(isValid() ? cnt : "-1")
