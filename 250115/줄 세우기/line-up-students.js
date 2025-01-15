@@ -1,13 +1,3 @@
-function compare(a, b) {
-    if (a.height > b.height) {
-        return b.height - a.height;
-    } else if (a.height === b.height) {
-        return b.weight - a.weight;
-    } else if (a.weight === b.weight) {
-        return a.number - b.number
-    }
-}
-
 class Info {
     constructor(height, weight, number) {
         this.height = height;
@@ -27,8 +17,12 @@ for (let i=0; i<n; i++) {
     arr.push(new Info(height, weight, i+1))
 }
 
-arr.sort(compare)
+arr.sort((a, b) => {
+    if (a.height !== b.height) return b.height - a.height // 키 내림차순
+    if (a.weight !== b.weight) return b.weight - a.weight // 몸무게 내림차순
+    return a.number - b.number // 번호 오름차순
+})
 
-for (let i=0; i<n; i++) {
-    console.log(`${arr[i].height} ${arr[i].weight} ${arr[i].number}`)
-}
+arr.forEach(student => {
+    console.log(`${student.height} ${student.weight} ${student.number}`)
+})
