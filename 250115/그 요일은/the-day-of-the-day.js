@@ -20,5 +20,9 @@ function calcDays(m, d) {
 }
 
 // 두 날짜 간격
+let dayOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
 const diff = calcDays(m2, d2) - calcDays(m1, d1)
-console.log(diff % 7 >= 5 ? parseInt(diff / 7) + 1 : parseInt(diff / 7))
+const idx = dayOfWeek.indexOf(a)
+
+console.log(diff % 7 >= idx ? parseInt(diff / 7) + 1 : parseInt(diff / 7))
