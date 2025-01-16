@@ -3,9 +3,9 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const n = Number(input[0]);
 
-let point = 1000; // 원점의 인덱스 초기화
-let blackArr = Array(2000).fill(0); // 검정 체크 배열
-let whiteArr = Array(2000).fill(0); // 흰색 체크 배열
+let point = 100000; // 원점의 인덱스 초기화
+let blackArr = Array(200000).fill(0); // 검정 체크 배열
+let whiteArr = Array(200000).fill(0); // 흰색 체크 배열
 
 let checkArr = Array(2000).fill(''); // 무슨 색으로 칠해졌는지 확인하는 배열
 
@@ -29,7 +29,7 @@ for (let i=0; i<n; i++) {
 }
 
 let [white, black, gray] = [0, 0, 0];
-for (let i=0; i<2000; i++) {
+for (let i=0; i<200000; i++) {
    if (blackArr[i] >= 2 && whiteArr[i] >= 2) {
     gray++;
    } else {
