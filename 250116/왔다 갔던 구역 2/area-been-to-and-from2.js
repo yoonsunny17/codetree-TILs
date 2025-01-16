@@ -9,7 +9,7 @@ for (let i=0; i<n; i++) {
     const [x, command] = input[i+1].split(' ');
 
     if (command === 'R') {
-        for (let i=point; i<point+Number(x); i++) {
+        for (let i=point+1; i<=point+Number(x); i++) {
             arr[i]++
         }
         point += Number(x);
