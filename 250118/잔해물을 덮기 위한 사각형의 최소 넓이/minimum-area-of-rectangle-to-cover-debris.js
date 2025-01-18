@@ -23,33 +23,28 @@ for (let i=0; i<2; i++) {
     }
 }
 
-let maxGaro = 0;
-let maxSero = 0;
+let [maxX, maxY, minX, minY] = [-Infinity, -Infinity, Infinity, Infinity];
 
 for (let i=0; i<2001; i++) {
-    let tmpGaro = 0;
     for (let j=0; j<2001; j++) {
         if (matrix[i][j] === 1) {
-            tmpGaro++;
-        }
-    }
+            if (maxX < i) {
+                maxX = i;
+            }
 
-    if (maxGaro < tmpGaro) {
-        maxGaro = tmpGaro;
+            if (maxY < j) {
+                maxY = j;
+            }
+
+            if (minX > i) {
+                minX = i;
+            }
+
+            if (minY > j) {
+                minY = j;
+            }
+        }
     }
 }
 
-for (let j=0; j<2001; j++) {
-    let tmpSero = 0;
-    for (let i=0; i<2001; i++) {
-        if (matrix[i][j] === 1) {
-            tmpSero++;
-        }
-    }
-
-    if (maxSero < tmpSero) {
-        maxSero = tmpSero;
-    }
-}
-
-console.log(maxGaro * maxSero)
+console.log((maxX-minX+1) * (maxY-minY+1));
