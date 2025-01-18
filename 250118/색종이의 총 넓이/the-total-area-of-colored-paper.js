@@ -9,7 +9,7 @@ for (let i=0; i<n; i++) {
 
     for (let a=x; a<x+8; a++) {
         for (let b=y; b<y+8; b++) {
-            matrix[a][b] = 1;
+            matrix[a+100][b+100] = 1;
         }
     }
 }
