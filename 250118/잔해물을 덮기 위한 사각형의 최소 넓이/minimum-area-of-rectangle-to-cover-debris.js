@@ -47,4 +47,8 @@ for (let i=0; i<2001; i++) {
     }
 }
 
-console.log((maxX-minX+1) * (maxY-minY+1));
+if (maxX === -Infinity || maxY === -Infinity || minX === Infinity || minY === Infinity) {
+    console.log(0);
+} else {
+    console.log((maxX-minX+1) * (maxY-minY+1));
+}
