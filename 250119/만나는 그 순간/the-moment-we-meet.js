@@ -8,39 +8,25 @@ let MAX_TIME = 1000000;
 let lstA = Array(MAX_TIME + 1).fill(0);
 let lstB = Array(MAX_TIME + 1).fill(0);
 
-let idxA = 0;
-let idxB = 0;
+let inputLine = 1;
+let timeA = 1, timeB = 1;
 
-// A 이동 위치 체크
+// a가 이동한 경로 체크
 for (let i=0; i<n; i++) {
-    let [d, t] = input[i+1].split(' ');
-
-    if (d === 'R') {
-        for (let i=1; i<=Number(t); i++) {
-            lstA[idxA+i] = lstA[idxA+i-1] + 1;
-        }
-    } else {
-        for (let i=1; i<=Number(t); i++) {
-            lstA[idxA+i] = lstA[idxA+i-1] - 1;
-        }
+    const [d, t] = input[inputLine++].split(' ');
+    for (let j=0; j<Number(t); j++) {
+        lstA[timeA] = lstA[timeA-1] + (d === 'R' ? 1 : -1);
+        timeA++
     }
-    idxA = idxA+Number(t);
 }
 
-// B 이동 위치 체크
+// b가 이동한 경로 체크
 for (let i=0; i<m; i++) {
-    let [d, t] = input[i+n+1].split(' ');
-
-    if (d === 'R') {
-        for (let i=1; i<=Number(t); i++) {
-            lstB[idxB+i] = lstB[idxB+i-1] + 1;
-        }
-    } else {
-        for (let i=1; i<=Number(t); i++) {
-            lstB[idxB+i] = lstB[idxB+i-1] - 1;
-        }
+    const [d, t] = input[inputLine++].split(' ');
+    for (let j=0; j<Number(t); j++) {
+        lstB[timeB] = lstB[timeB-1] + (d === 'R' ? 1 : -1);
+        timeB++
     }
-    idxB = idxB+Number(t);
 }
 
 let ans = -1;
