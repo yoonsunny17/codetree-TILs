@@ -30,7 +30,7 @@ for (let i=0; i<m; i++) {
 }
 
 let ans = -1;
-for (let i=1; i<MAX_TIME+1; i++) {
+for (let i=1; i<timeA; i++) {
     if (lstA[i] === lstB[i]) {
         ans = i;
         break;
