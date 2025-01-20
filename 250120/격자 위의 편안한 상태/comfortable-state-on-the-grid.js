@@ -9,7 +9,7 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const [n, m] = input.shift().split(' ').map(Number);
 
 // n*n 이차원행렬
-let matrix = Array(n).fill(0).map((n) => Array().fill(0));
+let matrix = Array(n).fill(0).map(() => Array(n).fill(0));
 
 // 상 하 좌 우
 const dr = [-1, 1, 0, 0], dc = [0, 0, -1, 1];
