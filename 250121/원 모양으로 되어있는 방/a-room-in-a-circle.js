@@ -11,7 +11,7 @@ for (let i=0; i<n; i++) {
     let cnt = 0; // 각 경우 이동거리 계산
 
     for (let j=0; j<n; j++) {
-        if (j === 1) {
+        if (j === i) {
             // 시작 방과 같은 번호면 이동하지 않아도 된다
             continue;
         } else if (j > i) {
@@ -20,6 +20,7 @@ for (let i=0; i<n; i++) {
         } else {
             // 시작 방 번호보다 작은 경우
             cnt += ((n - i) + j) * numbs[j];
+
         }
     }
 
