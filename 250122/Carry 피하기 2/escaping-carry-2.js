@@ -3,10 +3,8 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const n = Number(input.shift());
 const numbs = Array.from({length: n}, (_, i) => Number(input[i]));
- 
-// console.log(numbs)
 
-let rlt = 0; // 최댓값 출력할 변수
+let rlt = -1; // 최댓값 출력할 변수 (없는 경우 -1 출력)
 
 const carry = (a, b, c) => {
     let len = Math.max(String(a).length, String(b).length, String(c).length); // 가장 길이가 긴 숫자만큼 확인해본다
@@ -39,4 +37,4 @@ for (let i=0; i<n-2; i++) {
     }
 }
 
-console.log(rlt > 0 ? rlt : -1);
+console.log(rlt);
