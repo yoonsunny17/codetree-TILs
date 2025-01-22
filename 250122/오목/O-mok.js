@@ -135,11 +135,20 @@ const diagonalCheck = () => {
     }
 }
 
-let [winnerColor, r, c] = [0, 0, 0];
+let [winnerColor, r, c] = [0, -1, -1];
 
 garoCheck();
 seroCheck();
 diagonalCheck();
 
-console.log(winnerColor === 5 ? 2 : 1)
-console.log(r, c);
+if (winnerColor === 5) {
+    console.log(2);
+} else if (winnerColor === -5) {
+    console.log(1);
+}
+
+if (r === -1 || c === -1) {
+    console.log(0);
+} else {
+    console.log(r, c);
+}
