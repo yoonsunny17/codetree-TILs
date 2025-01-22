@@ -33,7 +33,7 @@ for (let i=0; i<n-2; i++) {
             let [n1, n2, n3] = [numbs[i], numbs[j], numbs[k]];
             // 캐리 발생 여부 확인 (캐리 발생했으면 false, 발생하지 않았으면 숫자의 합 리턴)
             if (carry(n1, n2, n3)) {
-                rlt = Math.max(rlt, findCarry(n1, n2, n3));
+                rlt = Math.max(rlt, carry(n1, n2, n3));
             }
         }
     }
