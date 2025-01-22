@@ -66,10 +66,15 @@ const seroCheck = () => {
 
 // 대각선으로 확인
 const diagonalCheck = () => {
+    // 오른쪽 아래 방향 대각선
     for (let i=0; i<=14; i++) {
         for (let j=0; j<=14; j++) {
             const slice = [
-                matrix[i][j], matrix[i+1][j+1], matrix[i+2][j+2], matrix[i+3][j+3], matrix[i+4][j+4]
+                matrix[i][j],
+                matrix[i+1][j+1],
+                matrix[i+2][j+2], 
+                matrix[i+3][j+3], 
+                matrix[i+4][j+4]
             ]
 
             let [color, cnt] = [0, 0];
@@ -94,9 +99,42 @@ const diagonalCheck = () => {
             }
         }
     }
+
+    // 왼쪽 아래 방향 대각선
+    for (let i=0; i<=14; i++) {
+        for (let j=4; j<19; j++) {
+            const slice = [
+                matrix[i][j],
+                matrix[i+1][j-1],
+                matrix[i+2][j-2],
+                matrix[i+3][j-3],
+                matrix[i+4][j-4]
+            ]
+
+            let [color, cnt] = [0, 0];
+
+            slice.forEach((v) => {
+                if (v === 1) {
+                    color--;
+                    cnt++;
+                } else if (v === 2) {
+                    color++;
+                    cnt++;
+                } else {
+                    color = 0;
+                    cnt = 0;
+                }
+            })
+
+            if ((color === 5 || color === -5) && cnt === 5) {
+                winnerColor = color;
+                r = i+3, c = j-1;
+                return;
+            }
+        }
+    }
 }
 
-// 검은돌 발견 시 -1 씩, 흰돌 발견 시 +1 씩
 let [winnerColor, r, c] = [0, 0, 0];
 
 garoCheck();
