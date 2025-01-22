@@ -39,4 +39,4 @@ for (let i=0; i<n-2; i++) {
     }
 }
 
-console.log(rlt)
+console.log(rlt > 0 ? rlt : -1);
