@@ -56,7 +56,7 @@ const seroCheck = () => {
 
             if ((color === 5 || color === -5) && cnt === 5) {
                 winnerColor = color;
-                r = i+1, c = j+3;
+                r = i+3, c = j+1;
                 return;
             }
         }
@@ -89,7 +89,7 @@ const diagonalCheck = () => {
 
             if ((color === 5 || color === -5) && cnt === 5) {
                 winnerColor = color;
-                r = i+1, c = j+3;
+                r = i+3, c = j+3;
                 return;
             }
         }
