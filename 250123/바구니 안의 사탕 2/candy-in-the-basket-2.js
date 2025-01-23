@@ -9,7 +9,7 @@ const baskets = Array(101).fill(0);
 
 // 각 바구니 번호에 해당하는 곳에 사탕을 놔준다
 for (let info of infos) {
-    baskets[info[1]] = info[0];
+    baskets[info[1]] += info[0];
 }
 
 // 중심점 c가 가능한 범위에서 확인해본다
