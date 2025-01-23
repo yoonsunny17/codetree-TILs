@@ -1,37 +1,36 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const n = Number(input[0]);
-const infos = Array.from({length: n}, (_, i) => input[i+1].split(' '));
+const MAX_NUM = 100;
 
-// 0번부터 100번까지의 위치를 체크해줄 리스트
-let arr = Array(101).fill('');
+const n = Number(input.shift());
+const arr = Array(MAX_NUM+1).fill(0); // 0번부터 100번까지 번호 가지는 배열
 
-// 주어진 정보 하나씩 보면서 위치를 체크한다
-// 가장 맨 왼쪽에 서있는 사람의 위치를 찾아준다
-let len = 0;
-for (let info of infos) {
-    arr[Number(info[0])] = info[1];
-    len = Math.max(len, Number(info[0]));
+for (let i=0; i<n; i++) {
+    const [position, c] = input[i].split(' ');
+    
+    // G면 1, H면 2를 넣어준다
+    arr[Number(position)] = c === 'G' ? 1 : 2;
 }
 
-// 양 끝의 좌표(범위 좌표)를 찍어준다
+// 모든 구간의 시작점을 잡아보자
 let maxSize = 0;
-for (let i=0; i<len+1; i++) {
-    let cntG = 0, cntH = 0;
-    for (let j=i; j<len+1; j++) {
-        
-        // 구간 내의 알파벳 개수를 체크한다
-        for (let k=i; k<j+i-1; k++) {
-            if (arr[k] === 'G') {
-                cntG++;
-            } else if (arr[k] === 'H') {
-                cntH++;
-            }
+for (let i=0; i<=MAX_NUM; i++) {
+    for (let j=i+1; j<=MAX_NUM; j++) {
+        // i와 j 위치에 사람이 없다면 건너 뛴다
+        if (arr[i] === 0 || arr[j] === 0) {
+            continue;
         }
 
-        // 만약 세개의 조건 중 하나를 만족한다면, 사진의 크기 최댓값을 갱신한다
-        if ((cntG === 0 && cntH > 0) || (cntG > 0 && cntH === 0) || (cntG > 0 && cntH > 0 && cntG === cntH)) {
+        // 해당 구간에 G, H 갯수 세어준다
+        let cntG = 0, cntH = 0;
+        for (let k=i; k<=j; k++) {
+            if (arr[k] === 1) cntG++;
+            if (arr[k] === 2) cntH++;
+        }
+
+        // 조건 만족하는 경우 구간의 길이 최댓값 갱신해준다
+        if (cntG === 0 || cntH === 0 || cntG === cntH) {
             maxSize = Math.max(maxSize, j-i);
         }
     }
