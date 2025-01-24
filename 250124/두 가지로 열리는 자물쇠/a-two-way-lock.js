@@ -5,6 +5,11 @@ const n = Number(input[0]);
 const [a1, b1, c1] = input[1].split(' ').map(Number);
 const [a2, b2, c2] = input[2].split(' ').map(Number);
 
+if (n < 5) {
+    console.log(n ** 3);
+    return;
+}
+
 let totalCase = []; // 가능한 모든 경우의 수 넣기
 
 const checkRange = (numb) => {
