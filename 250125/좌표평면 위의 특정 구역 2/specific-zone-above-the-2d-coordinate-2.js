@@ -4,13 +4,11 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const n = Number(input.shift());
 const infos = Array.from({length: n}, (_, i) => input[i].split(' ').map(Number));
 
-const MAX_RANGE = 40000;
-
 let min_area = Number.MAX_SAFE_INTEGER; // 최소 영역 출력할 변수
 
 let idx = 0;
 while (idx !== n) {
-    let max_x = Number.MIN_SAFE_INTEGER, max_y = Number.MIN_SAFE_INTEGER;
+    let max_x = 1, max_y = 1;
     let min_x = Number.MAX_SAFE_INTEGER, min_y = Number.MAX_SAFE_INTEGER;
 
     for (let i=0; i<n; i++) {
