@@ -24,8 +24,9 @@ for (let i=0; i<n; i++) {
     let calc = 0;
     for (let c of changedPrices) {
         calc += c;
-
-        if (calc >= b) {
+        
+        // 해당 가격을 더했을 때 예산 초과하면 x
+        if (calc > b) {
             break;
         } else {
             cnt++;
