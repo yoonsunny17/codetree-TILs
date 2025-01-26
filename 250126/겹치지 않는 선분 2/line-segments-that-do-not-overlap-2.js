@@ -34,7 +34,7 @@ while (idx < n) {
     }
 
     // 다른 선분과 겹쳐지는 경우가 존재하지 않으면 세어준다
-    if (flag) rlt++;
+    if (!flag) rlt++;
     idx++;
 }
 
