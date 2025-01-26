@@ -41,7 +41,8 @@ for (let i=0; i<n; i++) {
                 let [x2, y2] = infos[j];
                 let [x3, y3] = infos[k];
 
-                let calc = (x1*y2 + x2*y3 + x3*y1) - (x2*y1 + x3*y2 + x1*y3);
+                let calc = Math.abs((x1*y2 + x2*y3 + x3*y1) - (x2*y1 + x3*y2 + x1*y3));
+
                 maxVal = Math.max(maxVal, calc);
             }
         }
