@@ -7,17 +7,21 @@ const infos = Array.from({length: k}, (_, i) => input[i].split(' ').map(Number))
 let rlt = 0;
 // 비교할 두 번호를 고른다
 for (let i=1; i<=n; i++) {
-    for (let j=i+1; j<=n; j++) {
-        let one = infos[0].indexOf(i), two = infos[0].indexOf(j);
-        let cnt = 0;
+    for (let j=1; j<=n; j++) {
+        if (i === j) {
+            continue;
+        }
 
-        // 두 개발자의 순위가 지속되는지 확인한다
+        // 순위가 바뀌는지 체크해본다
+        let flag = true;
         for (let info of infos) {
-            if (info.indexOf(one) > info.indexOf(two)) cnt++;
-            else cnt--;
+            if (info.indexOf(i) < info.indexOf(j)) {
+                flag = false;
+                break;
+            }
         }
         
-        if (Math.abs(cnt) === k) rlt++;
+        if (flag) rlt++;
     }
 }
 
