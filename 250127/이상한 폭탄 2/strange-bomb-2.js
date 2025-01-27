@@ -5,14 +5,18 @@ const [n, k] = input[0].split(' ').map(Number);
 const bombs = Array.from({length: n}, (_, i) => Number(input[i+1]));
 
 let maxVal = -1;
-// k개씩 끊어서 확인해본다
-for (let i=0; i<n-k; i++) {
+for (let i=0; i<n-k+1; i++) {
     let checkBombs = bombs.slice(i, i+k+1);
-    checkBombs.sort((a, b) => a - b);
+    
+    const frequency = checkBombs.reduce((acc, num) => {
+        acc[num] = (acc[num] || 0) + 1;
+        return acc;
+    }, {});
+    
+    // 한개 이상의 숫자들만 모은다
+    const duplicates = Object.keys(frequency).filter(num => frequency[num] > 1).map(Number);
 
-    if (checkBombs[k] === checkBombs[k-1]) {
-        maxVal = Math.max(maxVal, checkBombs[k-1]);
-    }
+    maxVal = Math.max(maxVal, ...duplicates);
 }
 
 console.log(maxVal);
