@@ -13,12 +13,14 @@ for (let checkCase of checkCases) {
     checkArr.push([numbs[a], numbs[b], numbs[c]]);
 }
 
-// set으로 만들었을 때, set의 크기가 2이면 가능
-let cnt = 0
+let twoNumberList = [];
 checkArr.forEach((arr) => {
+    // 두 개의 숫자로만 이루어져 있는 경우라면
     if (new Set(arr).size === 2) {
-        cnt++;
+        // 가능한 상황이므로 배열에 담아주되, string화 시켜서 넣어준다 (중복 경우 체크를 위해)
+        twoNumberList.push(arr.join(''));
     }
 })
 
-console.log(cnt);
+// 중복되는 경우를 제외하고 출력한다
+console.log(new Set(twoNumberList).size);
