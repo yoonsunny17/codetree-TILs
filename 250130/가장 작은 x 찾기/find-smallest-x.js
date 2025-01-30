@@ -1,8 +1,3 @@
-
-// 범위 체크할 때, 범위를 벗어나면 바로 끝내고 다음 숫자를 탐색한다
-
-// n개의 조건을 모두 만족하는 숫자들 중, 최솟값을 구한다
-
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
@@ -20,14 +15,13 @@ for (let i=1; i<=10000; i++) {
         if (a <= x && x <= b) {
             continue;
         } else {
+            // 범위를 벗어난 경우 체크해준다
             flag = false;
         }
-        
-        // if (!flag) {
-        //     console.log(i, x, info)
-        
     }
+
     if (flag) {
+        // 작은 숫자부터 체크하고 있으므로, 숫자 x를 찾았다면 끝내도 된다
         console.log(i);
         return;
     }
