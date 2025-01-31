@@ -22,8 +22,8 @@ const isPossible = (numb) => {
     return true;
 }
 
-let minMax = n; // 최댓값들 중 최솟값
-for (let a=n; a>=Math.max(numbs[0], numbs[n-1]); a--) {
+let minMax = 101; // 최댓값들 중 최솟값
+for (let a=Math.max(...numbs); a>=Math.max(numbs[0], numbs[numbs.length-1]); a--) {
     // k 이내에 들어올 수 있다면, minMax 갱신해줘
     if (isPossible(a)) {
         minMax = Math.min(minMax, a);
