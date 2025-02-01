@@ -15,8 +15,8 @@ for (let info of infos) {
         dict.set(numb, location);
     } else {
         // 위치 정보가 들어가 있는데, 새로 받은 위치가 다르면 갱신해주고, cnt++ 한다
-        if (dict[numb] !== location) {
-            dict[numb] = location;
+        if (dict.get(numb) !== location) {
+            dict.set(numb, location);
             cnt++;
         }
     }
