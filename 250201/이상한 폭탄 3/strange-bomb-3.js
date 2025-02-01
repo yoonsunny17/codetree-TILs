@@ -24,7 +24,7 @@ for (let check of checkNumb) {
         cnt = 1;
     } else {
         for (let j=0; j<sameBomb.length-1; j++) {
-            if (sameBomb[j+1] - sameBomb[j] < k) {
+            if (sameBomb[j+1] - sameBomb[j] <= k) {
                 cnt++;
             }
         }
