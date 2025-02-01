@@ -24,16 +24,18 @@ for (let check of checkNumb) {
         cnt = 1;
     } else {
         for (let j=0; j<sameBomb.length-1; j++) {
-            if (sameBomb[j+1] - sameBomb[j] <= k) {
+            if (sameBomb[j+1] - sameBomb[j] < k) {
                 cnt++;
             }
         }
     }
-
+    
+    // 더 많이 터진 폭탄이 있다면, 최대 폭발 개수 갱신해준다
+    // 그리고 폭탄 번호 갱신해준다
     if (maxCnt < cnt) {
         maxCnt = cnt;
         maxBomb = check;
     }
 }
 
-console.log(maxBomb === 1 ? 0 : maxBomb);
+console.log(maxCnt === 1 ? 0 : maxBomb);
