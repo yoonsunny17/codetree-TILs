@@ -6,6 +6,16 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const [n, m] = input[0].split(' ').map(Number);
 const infos = input[1].split(' ').map(Number);
 
+if (!infos.includes(1)) {
+    console.log(0);
+    return;
+}
+
+if (infos.includes(1) && n <= m) {
+    console.log(1);
+    return;
+}
+
 idx = m;
 cnt = 1;
 while (true) {
