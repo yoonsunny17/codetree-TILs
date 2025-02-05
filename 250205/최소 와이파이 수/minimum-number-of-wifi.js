@@ -14,6 +14,12 @@ while (true) {
     if (idx >= n) {
         break;
     }
+
+    // 근데 와이파이 두려는 곳에 사람이 살지 않으면, 굳이 설치할 필요가 없다
+    if (infos[idx] === 0) {
+        idx += 1;
+    }
+
     cnt++;
 }
 
