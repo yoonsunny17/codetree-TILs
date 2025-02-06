@@ -31,7 +31,7 @@ for (let info of infos) {
         winner.push(5);
     } else if (scores['B'] === scores['C'] && scores['C'] > scores['A']) {
         winner.push(6);
-    } else if (scores['A'] === scores['B'] === scores['C']) {
+    } else if (scores['A'] === scores['B'] && scores['A'] === scores['C']) {
         winner.push(7);
     }
 }
