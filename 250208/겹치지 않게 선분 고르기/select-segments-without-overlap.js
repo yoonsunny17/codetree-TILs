@@ -1,37 +1,46 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const n = Number(input.shift());
-const infos = Array.from({length: n}, (_, i) => input[i].split(' ').map(Number));
+const n = Number(input[0]);
+const infos = input.slice(1).map(line => line.split(' ').map(Number));
 
-let rlt = [];
-let checkLines = Array(1001).fill(0); // 선분 체크할 리스트
-
+const visited = Array(n).fill(false);
 let maxCnt = 0;
-function solution(currNum) {
-    // 종료 조건: n개 모두 확인한 경우
-    if (currNum === n) {
-        maxCnt = Math.max(maxCnt, rlt.length);
+
+function backtracking(curr, selected) {
+    if (curr === n) {
+        maxCnt = Math.max(maxCnt, selected.length);
         return;
     }
 
-    // 재귀: 겹치지 않는 선분들을 모두 찾아낸다
-    for (let info of infos) {
-        let [r, l] = info;
+    // 현재 선분을 선택하지 않는 경우
+    backtracking(curr+1, selected);
 
-        // r부터 l 구간에 1이 하나라도 있으면 겹치는걸로 간주한다
-        let check = checkLines.slice(r, l+1).every((v) => v === 0);
+    // 현재 선분을 선택하는 경우
+    if (!visited[curr]) {
+        const [start, end] = infos[curr];
+        let canSelect = true;
 
-        if (check) {
-            checkLines = checkLines.map((v, i) => (i >= r && i <= l ? 1 : v))
-            rlt.push(info);
-            solution(currNum+1);
-        } else {
-            solution(currNum+1);
+        // 이미 선택된 선분들과 겹치는지 확인
+        for (let line of selected) {
+            const [s, e] = line;
+            if (!(end < s || e < start)) {
+                // 겹치는 경우라면 선택될 수 없다
+                canSelect = false;
+                break;
+            }
+        }
+
+        if (canSelect) {
+            // 겹치지 않는 경우라면 선택할 수 있다
+            visited[curr] = true;
+            selected.push(infos[curr]);
+            backtracking(curr+1, selected);
+            selected.pop();
+            visited[curr] = false;
         }
     }
 }
 
-solution(0);
-
+backtracking(0, []);
 console.log(maxCnt);
