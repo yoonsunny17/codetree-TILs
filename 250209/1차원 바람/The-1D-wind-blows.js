@@ -13,17 +13,17 @@ const matrix = Array.from({length: n}, (_, i) => input[i+1].trim().split(' ').ma
 const infos = Array.from({length: q}, (_, i) => input[i+1+n].trim().split(' '));
 
 for (let info of infos) {
-    let [r, d] = info.map((v, i) => i === 0 ? Number(v) : v);
+    let [r, d] = info.map((v, i) => i === 0 ? Number(v)-1 : v);
 
     // 1. r행에 바람 불어준다
     if (d === 'R') {
-        matrix[r-1].push(matrix[r-1].shift());
+        matrix[r].push(matrix[r].shift());
     } else {
-        matrix[r-1].unshift(matrix[r-1].pop());
+        matrix[r].unshift(matrix[r].pop());
     }
 
     // 2. r행 윗열들에 대해, 같은 열에 같은 숫자가 있는지 확인한다
-    let curr_row_up = r-1;
+    let curr_row_up = r;
     let curr_dir_up = d;
     for (let row=curr_row_up-1; row>=0; row--) {
         let flag = false;
@@ -41,8 +41,6 @@ for (let info of infos) {
             } else {
                 matrix[row].push(matrix[row].shift());
             }
-        } else {
-            continue;
         }
 
         // 기준이 되는 열과 방향을 갱신한다
@@ -51,7 +49,7 @@ for (let info of infos) {
     }
 
     // 3. r행 아래열들에 대해, 같은 열에 같은 숫자가 있는지 확인한다
-    let curr_row_down = r-1;
+    let curr_row_down = r;
     let curr_dir_down = d;
     for (let row=curr_row_down+1; row<n; row++) {
         let flag = false;
@@ -69,8 +67,6 @@ for (let info of infos) {
             } else {
                 matrix[row].push(matrix[row].shift());
             }
-        } else {
-            continue;
         }
         
         // 기준이 되는 열과 방향을 갱신한다
