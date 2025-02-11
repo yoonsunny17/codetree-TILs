@@ -1,9 +1,9 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const n = Number(input.shift());
-const matrix = Array.from({length: n}, (_, i) => input[i].split(' ').map(Number));
-const [r, c] = input[n].split(' ').map((v) => Number(v)-1);
+const n = Number(input[0]);
+const matrix = Array.from({length: n}, (_, i) => input[i+1].split(' ').map(Number));
+const [r, c] = input[n+1].split(' ').map((v) => Number(v)-1);
 
 // 상 하 좌 우
 dr = [-1, 1, 0, 0];
@@ -28,15 +28,22 @@ for (let i=0; i<4; i++) {
     }
 }
 
+// 폭탄 중력 작용해서 저장할 배열
+let new_matrix = Array.from({length: n}, () => Array(n).fill(0));
+
 // 폭탄 터진 후, 중력방향으로 정리한다
 // 열 기준으로, 아래에서 위로 확인한다
 for (let j=0; j<n; j++) {
-    for (let i=n-2; i>=0; i--) {
-        if (matrix[i+1][j] === 0) {
-            matrix[i+1][j] = matrix[i][j];
-            matrix[i][j] = 0;
+    let new_i = n-1;
+    for (let i=n-1; i>=0; i--) {
+        if (matrix[i][j] === 0) {
+            continue;
+        } else {
+            // 0이 아니라면, 새로운 배열에 저장해주고, 새로운 배열의 행 번호를 하나 위로 해준다
+            new_matrix[new_i][j] = matrix[i][j];
+            new_i -= 1;
         }
     }
 }
 
-matrix.forEach((row) => console.log(row.join(' ')));
+new_matrix.forEach((row) => console.log(row.join(' ')));
