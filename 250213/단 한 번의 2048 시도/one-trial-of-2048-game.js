@@ -10,6 +10,12 @@ if (dir === 'R') {
     for (let row of matrix) {
         let tmp = [];
 
+        // 방향으로 일단 밀고 시작한다.
+        row = row.filter((v) => v !== 0);
+        while (row.length < 4) {
+            row.unshift(0);
+        }
+
         for (let i=3; i>0; i--) {
             if (row[i] === 0) {
                 continue;
@@ -39,6 +45,11 @@ if (dir === 'R') {
 if (dir === 'L') {
     for (let row of matrix) {
         let tmp = [];
+
+        row = row.filter((v) => v !== 0);
+        while (row.length < 4) {
+            row.push(0);
+        }
 
         for (let i=0; i<3; i++) {
             if (row[i] === 0) {
@@ -87,6 +98,11 @@ if (dir === 'D') {
             col.push(matrix[i][j]);
         }
 
+        col = col.filter((v) => v !== 0);
+        while (col.length < 4) {
+            col.unshift(0);
+        }
+
         let tmp = [];
 
         for (let k=3; k>0; k--) {
@@ -127,6 +143,11 @@ if (dir === 'U') {
         let col = [];
         for (let i=0; i<=3; i++) {
             col.push(matrix[i][j]);
+        }
+
+        col = col.filter((v) => v !== 0);
+        while (col.length < 4) {
+            col.push(0);
         }
 
         let tmp = [];
