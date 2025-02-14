@@ -3,13 +3,13 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const [n, m] = input[0].split(' ').map(Number);
 const matrix = Array.from({length: n}, (_, i) => input[i+1].split(' ').map(Number));
-const visited = Array.from({length: n}, () => Array.from({length: n}, () => false));
+const visited = Array.from({length: n}, () => Array.from({length: m}, () => false));
 
 visited[0][0] = true; // 시작지점 방문 체크 해준다
 
 // 탐색하는 좌표가 범위 내에 존재하는지 확인한다
 function inRange(r, c) {
-    return r >= 0 && r < n && c >= 0 && c < n;
+    return r >= 0 && r < n && c >= 0 && c < m;
 }
 
 // 범위 내, 뱀 아님, 방문한 적 없으면 탐색 가능하다
@@ -42,4 +42,4 @@ function dfs(r, c) {
 dfs(0, 0); // 출발지점: (0, 0)
 
 // visited에서 도착 지점이 true이면 탈출 성공
-console.log(visited[n-1][n-1] ? 1 : 0);
+console.log(visited[n-1][m-1] ? 1 : 0);
