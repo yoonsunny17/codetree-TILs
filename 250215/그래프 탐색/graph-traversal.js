@@ -28,4 +28,4 @@ function dfs(vertex) {
 }
 
 dfs(1);
-console.log(cnt-1); // 1번 정점 제외하고 계산한다
+console.log(cnt-1 > 0 ? cnt-1 : 0); // 1번 정점 제외하고 계산한다
