@@ -12,15 +12,21 @@ const checkBlock = (row) => {
     return true;
 }
 
-// 각 row마다, (k-1, k+m-1) 범위를 체크한다
-for (let i=n-1; i>=0; i--) {
-    if (checkBlock(i)) {
-        for (let j=k-1; j<k+m-1; j++) {
-            matrix[i][j] = 1;
-        }
-        // 놓을 자리 찾았으면 끝!
+// 위에서 아래로 탐색하면서, 최대로 블럭이 떨어질 수 있는 row를 찾는다
+let check = [];
+let row = 0;
+while (row < n) {
+    if (!checkBlock(row)) {
         break;
     }
+
+    check.push(row);
+    row++;
 }
 
-matrix.map((row) => console.log(row.join(' ')));
+let maxRow = check[check.length - 1];
+for (let j=k-1; j<k+m-1; j++) {
+    matrix[maxRow][j] = 1;
+}
+
+matrix.forEach((row) => console.log(row.join(' ')));
