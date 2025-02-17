@@ -4,11 +4,10 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const [n, m] = input[0].split(' ').map(Number);
 const matrix = Array.from({length: n}, (_, i) => input[i+1].trim().split(' ').map(Number));
 
-// k의 범위를 구한다
-let minK = 101, maxK = 0;
+// k의 최댓값을 구한다 > 1부터 maxK까지 확인한다
+let maxK = 0;
 for (let i=0; i<n; i++) {
     for (let j=0; j<m; j++) {
-        minK = Math.min(minK, matrix[i][j]);
         maxK = Math.max(maxK, matrix[i][j]);
     }
 }
@@ -49,7 +48,7 @@ const dfs = (r, c, k, visited) => {
 let rlt = [-1, -1];
 
 // k 하나에 대해, 각자 안전영역이 몇개씩 나오는지 확인한다
-for (let k=minK; k<=maxK; k++) {
+for (let k=1; k<=maxK; k++) {
     // k값이 바뀔 때마다 visited 초기화 해줘야 한다
     const visited = Array.from({length: n}, () => Array.from({length: m}, () => false));
     let cnt = 0;
