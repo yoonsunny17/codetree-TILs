@@ -8,9 +8,9 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const [n, k] = input[0].trim().split(' ').map(Number);
+const [n, k] = input[0].split(' ').map(Number);
 const matrix = Array.from({length: n}, (_, i) => input[i+1].trim().split(' ').map(Number));
-const [r, c] = input[n+1].trim().split(' ').map((v) => Number(v)-1);
+const [r, c] = input[n+1].split(' ').map((v) => Number(v)-1);
 
 const inRange = (r, c) => {
     return r >= 0 && r < n && c >= 0 && c < n;
@@ -42,16 +42,20 @@ const bfs = (r, c, prev) => {
                 // 방문 처리, 큐에 넣기
                 visited[nr][nc] = true;
                 q.push([nr, nc]);
+                // 1. 현재 숫자보다 더 큰 숫자인 경우 > 숫자와 위치 모두 갱신해준다.
+                // 2. 현재 숫자와 동일한 숫자인 경우
+                // 2-1. 행이 더 작으면 갱신해준다 (종료)
+                // 2-2. 행이 동일하고 열이 더 작으면 갱신해준다 (종료)
                 if (maxNumb < matrix[nr][nc]) {
                     maxNumb = matrix[nr][nc];
                     maxPosition = [nr, nc];
-                }
-
-                if (maxNumb === matrix[nr][nc]) {
+                } else if (maxNumb === matrix[nr][nc]) {
                     if (maxPosition[0] > nr) {
                         maxPosition = [nr, nc];
-                    } else if (maxPosition[0] === nr) {
+                        break;
+                    } else if (maxPosition[0] === nr && maxPosition[1] > nc) {
                         maxPosition = [nr, nc];
+                        break;
                     }
                 }
             }
