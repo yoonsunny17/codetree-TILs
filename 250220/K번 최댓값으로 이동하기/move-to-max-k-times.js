@@ -42,20 +42,17 @@ const bfs = (r, c, prev) => {
                 // 방문 처리, 큐에 넣기
                 visited[nr][nc] = true;
                 q.push([nr, nc]);
-                // 1. 현재 숫자보다 더 큰 숫자인 경우 > 숫자와 위치 모두 갱신해준다.
-                // 2. 현재 숫자와 동일한 숫자인 경우
-                // 2-1. 행이 더 작으면 갱신해준다 (종료)
-                // 2-2. 행이 동일하고 열이 더 작으면 갱신해준다 (종료)
                 if (maxNumb < matrix[nr][nc]) {
+                    // 다음 탐색 노드가 현재 최댓값보다 크면 숫자와 위치 갱신한다
                     maxNumb = matrix[nr][nc];
                     maxPosition = [nr, nc];
                 } else if (maxNumb === matrix[nr][nc]) {
+                    // 숫자가 동일한 경우
+                    // 1. 열 비교  2. 행 비교
                     if (maxPosition[0] > nr) {
                         maxPosition = [nr, nc];
-                        break;
                     } else if (maxPosition[0] === nr && maxPosition[1] > nc) {
                         maxPosition = [nr, nc];
-                        break;
                     }
                 }
             }
@@ -64,7 +61,7 @@ const bfs = (r, c, prev) => {
 
     // 만약 최댓값이 갱신되지 않았다면 > 움직일 수 없었다는 의미
     if (maxNumb === -1) {
-        return [-1, -1]
+        return [-1, [-1, -1]]
     }
 
     return [maxNumb, maxPosition]
@@ -80,7 +77,7 @@ while (true) {
     }
 
     let [maxNumb, maxPosition] = bfs(sr, sc, curr);
-    if (maxNumb === -1 && maxPosition === -1) {
+    if (maxNumb === -1 && maxPosition[0] === -1 && maxPosition[1] === -1) {
         break;
     }
 
