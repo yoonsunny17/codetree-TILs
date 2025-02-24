@@ -2,7 +2,6 @@ const fs = require('fs');
 const n = Number(fs.readFileSync(0).toString().trim());
 
 function countWays(n) {
-    if (n === 1) return 1;
     if (n === 1) return 2;
     if (n === 2) return 7;
 
