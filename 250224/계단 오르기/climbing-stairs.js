@@ -1,31 +1,25 @@
 const fs = require('fs');
-const n = Number(fs.readFileSync(0).toString().trim());
+const n = Number(fs.readFileSync(0).toString());
 
-// n번째 계단에 오르는 방법 수를 저장한다
-const dp = Array(n+1).fill(0);
+const stepping = (n) => {
+    if (n === 1) return 0;
+    if (n === 2) return 1;
+    if (n === 3) return 1;
 
-if (n === 1) {
-    console.log(0);
-    return
-};
+    // n층까지 올라가는 방법의 수를 저장한다
+    let dp = new Array(n+1).fill(0);
+    dp[0] = 1;
+    dp[1] = 0;
+    dp[2] = 1;
+    dp[3] = 1;
 
-if (n === 2) {
-    console.log(1);
-    return
+    // n층에 올라가는 방법의 수 = n-2층까지 올라가는 방법 + n-3층까지 올라가는 방법
+    for (let i=4; i<=n; i++) {
+        // 10007로 나눈 나머지를 저장한다
+        dp[i] = (dp[i-2] + dp[i-3]) % 10007;
+    }
+
+    return dp[n];
 }
 
-if (n === 3) {
-    console.log(1);
-    return
-}
-
-dp[0] = 1;
-dp[1] = 0;
-dp[2] = 1;
-dp[3] = 1;
-
-for (let i=4; i<=n; i++) {
-    dp[i] = dp[i-2] + dp[i-3];
-}
-
-console.log(dp[n]);
+console.log(stepping(n));
