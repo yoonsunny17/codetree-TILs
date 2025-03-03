@@ -4,7 +4,7 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const n = Number(input.shift());
 const numbs = input[0].split(' ').map(Number);
 const dp = Array.from({length: n}, () => -1);
-dp[0] = 0; // 첫번째 위치에서 시작하므로 1 초기화
+dp[0] = 0; // 시작 위치의 dp는 0으로 초기화한다
 
 for (let i=1; i<n; i++) {
     for (let j=0; j<i; j++) {
