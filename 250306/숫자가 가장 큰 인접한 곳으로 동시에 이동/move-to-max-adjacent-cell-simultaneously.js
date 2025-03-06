@@ -6,7 +6,7 @@ const matrix = Array.from({length: n}, (_, i) => input[i+1].split(' ').map(Numbe
 const infos = Array.from({length: m}, (_, i) => input[i+n+1].split(' ').map((v) => Number(v)-1));
 
 let check = Array.from({length: n}, (_, i) => Array.from({length: n}, () => 0)); // 현재 구슬의 위치 확인
-let nextCheck = Array.from({length: n}, (_, i) => Array.from({length: n}, () => 0)); // 구슬의 다음 위치 확인
+// let nextCheck = Array.from({length: n}, (_, i) => Array.from({length: n}, () => 0)); // 구슬의 다음 위치 확인
 
 // 상 하 좌 우
 const dr = [-1, 1, 0, 0];
@@ -20,7 +20,7 @@ for (let info of infos) {
 
 const inRange = (r, c) => r >= 0 && r < n && c >= 0 && c < n;
 
-const moveBead = (r, c) => {
+const moveBead = (r, c, nextCheck) => {
     let [sr, sc, val] = [r, c, 0];
     for (let d=0; d<4; d++) {
         let nr = r + dr[d];
@@ -43,11 +43,14 @@ const moveBead = (r, c) => {
 
 // t초동안 반복 진행한다
 for (let t=0; t<time; t++) {
+    // 1초마다 새로운 nextCheck에서 검사한다
+    let nextCheck = Array.from({length: n}, (_, i) => Array.from({length: n}, () => 0)); // 구슬의 다음 위치 확인
+
     for (let i=0; i<n; i++) {
         for (let j=0; j<n; j++) {
             // 구슬이 있는 곳이라면, 탐색을 시작하자
             if (check[i][j] === 1) {
-                moveBead(i, j)
+                moveBead(i, j, nextCheck)
             }
         }
     }
