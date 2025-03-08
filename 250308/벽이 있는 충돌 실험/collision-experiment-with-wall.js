@@ -50,6 +50,7 @@ for (let t=0; t<T; t++) {
         infos = nextInfos.filter(([r, c, _]) => nextBeads.get(`${r},${c}`) === 1);
 
         // 구슬 모두 사라졌다면 끝낸다
+        if (infos.length === 1) break;
         if (infos.length === 0) break;
     }
 
