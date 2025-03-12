@@ -9,7 +9,7 @@ let dp = Array(m+1).fill(INT_MAX);
 dp[0] = 0;
 
 // 수열의 숫자를 차례대로 검사해본다
-for (let i=1; i<=n; i++) {
+for (let i=0; i<n; i++) {
     // dp는 역순으로 체크해본다
     for (let j=m; j>=0; j--) {
         // 만약에 현재의 숫자가 합 j보다 작거나 같은 경우 고민해볼 수 있다
