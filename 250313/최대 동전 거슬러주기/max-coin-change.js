@@ -2,7 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const [n, m] = input[0].split(' ').map(Number);
-const numbs = input[1].split(' ').map(Number);
+const numbs = input[1].trim().split(' ').map(Number);
 
 const MIN_INT = Number.MIN_SAFE_INTEGER;
 let dp = Array(m+1).fill(MIN_INT);
@@ -20,4 +20,4 @@ for (let i=1; i<=m; i++) {
     }
 }
 
-console.log(dp[m] === MIN_INT ? -1 : dp[m]);
+console.log(dp[m] < 0 ? -1 : dp[m]);
