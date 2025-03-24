@@ -46,4 +46,4 @@ const backtracking = (cnt, r, c) => {
 }
 
 backtracking(0, sr, sc);
-console.log(cnt);
+console.log(ans);
