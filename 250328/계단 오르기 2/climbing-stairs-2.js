@@ -7,8 +7,9 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const n = Number(input[0]);
 const coins = [0, ...input[1].split(' ').map(Number)];
+const INT_MIN = Number.MIN_SAFE_INTEGER;
 
-const dp = Array.from({length: n+1}, () => Array(4).fill(-1));
+const dp = Array.from({length: n+1}, () => Array(4).fill(INT_MIN));
 dp[0][0] = 0; // dp 초기화 (0번째 계단 올라간 경우)
 
 // 1층부터 n층까지 확인해본다
@@ -27,4 +28,5 @@ for (let i=1; i<=n; i++) {
         }
     }
 }
-console.log(dp[n][2]);
+
+console.log(Math.max(...dp[n]));
