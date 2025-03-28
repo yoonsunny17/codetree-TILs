@@ -27,5 +27,4 @@ for (let i=1; i<=n; i++) {
         }
     }
 }
-
-console.log(Math.max(...dp[n]));
+console.log(dp[n][2]);
