@@ -4,6 +4,10 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const n = Number(input[0]);
 const numbs = input[1].split(' ');
 
+// 모든 숫자를 같은 길이로 맞춘다
+const maxLen = Math.max(...numbs.map(num => num.length));
+numbs = numbs.map(num => num.padStart(maxLen, '0')); // 0-padding
+
 const radix_sort = (numbs, k) => {
     // 숫자 자릿수에 대해, 1의 자리부터 확인한다
     for (let pos=k-1; pos>=0; pos--) {
@@ -35,4 +39,6 @@ const radix_sort = (numbs, k) => {
     return numbs;
 }
 
-console.log(radix_sort(numbs, 1).join(' '));
+const sorted = radix_sort(numbs, maxLen);
+console.log(sorted.map(num => String(Number(num))).join(' '));
+// console.log(radix_sort(numbs, maxLen).join(' '));
