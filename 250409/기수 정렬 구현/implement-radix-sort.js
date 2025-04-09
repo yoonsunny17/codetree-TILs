@@ -2,7 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const n = Number(input[0]);
-const numbs = input[1].split(' ');
+let numbs = input[1].split(' ');
 
 // 모든 숫자를 같은 길이로 맞춘다
 const maxLen = Math.max(...numbs.map(num => num.length));
@@ -21,19 +21,21 @@ const radix_sort = (numbs, k) => {
             // digit에 해당하는 위치에 숫자를 넣어준다
             new_numbs[digit].push(numbs[i]);
         }
+        // 정렬된 숫자를 원래 배열에 갱신한다
+        numbs = [].concat(...new_numbs);
 
-        // 정렬된 숫자들을 저장할 배열을 생성한다
-        let store_numbs = [];
-        // 0부터 9까지 확인한다
-        for (let i=0; i<10; i++) {
-            // 각 i에 해당하는 숫자들을 store_numbs에 저장해준다
-            for (let j=0; j<new_numbs[i].length; j++) {
-                store_numbs.push(new_numbs[i][j]);
-            }
-        }
+        // // 정렬된 숫자들을 저장할 배열을 생성한다
+        // let store_numbs = [];
+        // // 0부터 9까지 확인한다
+        // for (let i=0; i<10; i++) {
+        //     // 각 i에 해당하는 숫자들을 store_numbs에 저장해준다
+        //     for (let j=0; j<new_numbs[i].length; j++) {
+        //         store_numbs.push(new_numbs[i][j]);
+        //     }
+        // }
 
-        // 원래 배열을 store_numbs로 갱신한다
-        numbs = store_numbs;
+        // // 원래 배열을 store_numbs로 갱신한다
+        // numbs = store_numbs;
     }
 
     return numbs;
@@ -41,4 +43,3 @@ const radix_sort = (numbs, k) => {
 
 const sorted = radix_sort(numbs, maxLen);
 console.log(sorted.map(num => String(Number(num))).join(' '));
-// console.log(radix_sort(numbs, maxLen).join(' '));
