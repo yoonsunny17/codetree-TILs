@@ -13,7 +13,7 @@ const radix_sort = (numbs, k) => {
         // 배열의 숫자에 대해 하나씩 확인한다
         for (let i=0; i<n; i++) {
             // 배열의 i번째 숫자의 pos번째 위치에 적혀있는 숫자를 digit 변수에 저장한다
-            let digit = numbs[i][pos];
+            let digit = Number(numbs[i][pos]);
             // digit에 해당하는 위치에 숫자를 넣어준다
             new_numbs[digit].push(numbs[i]);
         }
