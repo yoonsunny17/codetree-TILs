@@ -14,14 +14,14 @@ class Student {
 }
 
 const cmp = (a, b) => {
-    if (a.eng === b.eng) {
-        return b.math - a.math;
-    } else if (a.kor === b.kor) {
-        return b.eng - a.eng;
+    if (a.kor !== b.kor) {
+        return b.kor - a.kor; // 국어 내림차순
+    } else if (a.eng !== b.eng) {
+        return b.eng - a.eng; // 영어 내림차순
+    } else {
+        return b.math - a.math; // 수학 내림차순
     }
-
-    return b.kor - a.kor;
-}
+};
 
 let students = [];
 for (let [name, kor, eng, math] of infos) {
