@@ -1,10 +1,14 @@
 const fs = require('fs');
 const numbs = fs.readFileSync(0).toString().trim().split(' ').map(Number);
 
-let even_numbs = numbs.filter((v) => v % 2 === 0);
-let sum1 = even_numbs.reduce((acc, curr) => acc + curr, 0);
+let sum1 = 0;
+for (let i=1; i<10; i+=2) {
+    sum1 += numbs[i];
+}
 
-let three_numbs = numbs.filter((v) => v % 3 === 0);
-let sum2 = three_numbs.reduce((acc, curr) => acc + curr, 0);
+let sum2 = 0;
+for (let i=2; i<10; i+=3) {
+    sum2 += numbs[i];
+}
 
-console.log(sum1, (sum2 / three_numbs.length).toFixed(1));
+console.log(sum1, (sum2/3).toFixed(1));
